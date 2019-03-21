@@ -1,4 +1,6 @@
 package tk.itiger;
 
-public class MessageRenderer {
+public interface MessageRenderer {
+
+    void render();
 }

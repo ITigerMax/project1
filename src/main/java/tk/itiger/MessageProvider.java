@@ -1,4 +1,7 @@
 package tk.itiger;
 
-public class MessageProvider {
+public interface MessageProvider {
+
+    String getMessage();
+
 }
