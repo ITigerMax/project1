@@ -44,6 +44,12 @@
             <version>2.3.28</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.15.Final</version>
+        </dependency>
+
     </dependencies>
 
 
