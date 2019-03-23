@@ -6,6 +6,9 @@
 
     <mvc:annotation-driven/>
     <context:component-scan base-package="tk.itiger"/>
+
+    <import resource="persistence-config.xml"/>
+
     <bean id="freeMarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/templates"/>
         <property name="defaultEncoding" value="UTF-8"/>

@@ -11,7 +11,7 @@ import tk.itiger.model.User;
 import tk.itiger.utils.UserValidator;
 
 import javax.validation.Valid;
-import java.sql.SQLException;
+
 
 @Controller
 public class MainController {
@@ -35,7 +35,7 @@ public class MainController {
     }
 
     @GetMapping("/users")
-    public String getUsers(Model model) throws SQLException {
+    public String getUsers(Model model) {
         model.addAttribute("users", userDAO.getAll());
         return "/users";
     }
