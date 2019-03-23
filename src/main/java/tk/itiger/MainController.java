@@ -1,20 +1,26 @@
 package tk.itiger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import tk.itiger.dao.UserDAO;
 import tk.itiger.model.User;
+import tk.itiger.utils.UserValidator;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
 
 @Controller
 public class MainController {
 
-    private List<User> users = new ArrayList<>();
+    @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
+    private UserValidator userValidator;
 
     @GetMapping("/view")
     public String view(@RequestParam(value = "name", required = false, defaultValue = "stranger") String name, Model model) {
@@ -29,8 +35,8 @@ public class MainController {
     }
 
     @GetMapping("/users")
-    public String getUsers(Model model) {
-        model.addAttribute("users", users);
+    public String getUsers(Model model) throws SQLException {
+        model.addAttribute("users", userDAO.getAll());
         return "/users";
     }
 
@@ -42,11 +48,11 @@ public class MainController {
 
     @PostMapping("/users/new")
     public String signUp(@ModelAttribute @Valid User user, BindingResult result) {
+        userValidator.validate(user, result);
         if (result.hasErrors()) {
             return "/sign_up";
         }
-        users.add(user);
-        System.out.println("Add user number: " + users.size());
+        userDAO.addUser(user);
         return "redirect:/users";
     }
 
