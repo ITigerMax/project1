@@ -1,10 +1,18 @@
 package tk.itiger.model;
 
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "users")
 public class User {
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @NotBlank(message = "Name is required")
     @Size(min = 3, max = 25, message = "Name should be from 3 to 25 symbols")
@@ -26,6 +34,13 @@ public class User {
         this.email = email;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
